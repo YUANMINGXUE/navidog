@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>databases</title>
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+
+<body>
+<script type="text/javascript">
+        $(function () {
+            function show(id) {
+                var n = document.getElementById(id)
+                var tables = n.innerHTML
+            }
+        })
+</script>
+    <table >
+        <tr><th>Databases</th></tr>
+        {% for i in list %}
+            <div id="{{i}}">
+                <tr><td >{{i}}</td></tr>
+                <div></div>
+            </div>
+        {% endfor %}
+    </table>
+</body>
+
+</html>

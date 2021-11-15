@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Navidog</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/login.css') }}"/>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <style>
+        body{
+			background: url("{{ url_for('static', filename='R-C.png') }}") no-repeat center center fixed;
+	                /*兼容浏览器版本*/
+	                -webkit-background-size: cover;
+	                -o-background-size: cover;                
+	                background-size: cover;
+		}
+    </style>
+</head>
+<body>
+	<div id="login-box">
+		<h1>Navidog</h1>
+        <form method="post" action="/">
+		<div class="form">
+             <div class="item">
+                <i>Host</i>
+			   <input type="text" placeholder="Host" name="host">
+			</div>
+			<div class="item">
+			   <i>User</i>
+			   <input type="text" placeholder="User" name="user">
+			</div>
+			<div class="item">
+			   <i>pswd</i>
+			   <input type="password" placeholder="Password" name="pwd">
+			</div>
+            <div class="item">
+			   <i>Port</i>
+			   <input type="text" placeholder="Port" name="port">
+			</div>
+
+
+		</div>
+		<button type="submit">Login</button>
+        </form>
+	</div>
+
+</body>
+</html>

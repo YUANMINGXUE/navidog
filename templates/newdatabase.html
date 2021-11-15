@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <script>
+        $(function () {
+            var $listA = $('.level1');
+
+            $listA.click(function () {
+                $(this).next().stop().slideToggle(300).parents().siblings().children('ul').slideUp();
+            });
+
+
+        })
+    </script>
+    <style>
+        ul {
+            list-style: none;
+
+        }
+
+        .div-left {
+            float: left
+        }
+
+        .menu {
+            padding: 0px;
+            margin: 0 auto;
+            width: 200px;
+            height: 500px;
+            /* border: 1px solid black; */
+
+        }
+
+        .menu li {
+
+            border-bottom: 1px solid #00FFFF;
+            text-align: left;
+        }
+
+        .menu li a {
+            line-height: 25px;
+            padding-left: 10px;
+            text-decoration: none;
+            display: block;
+            height: 25px;
+            width: 350px;
+            color: white;
+            background-color: #00619F;
+        }
+
+        .menu li ul {
+            display: none;
+            color: white;
+            padding: 0px;
+        }
+
+        .menu li ul li {
+            padding-left: 20px;
+            background-color: #55A8EA;
+            border-bottom: 1px solid #00FFFF;
+            width: 350px;
+        }
+    </style>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+
+        th {
+            background-color: #7799AA;
+            color: white;
+        }
+    </style>
+    <style>
+        iframe {
+            width: 100%;
+            height: 700px;
+        }
+    </style>
+</head>
+<body>
+<script>
+    function idname(datebase, table) {
+        console.log(datebase)
+        console.log(table)
+        $.ajax({
+            url: "/show",
+            type: "GET",
+            data: {'database': datebase, 'table': table},
+            success: function (res) {
+                result1 = res.result
+                heads = res.heads
+                console.log(result1)
+                console.log(heads)
+                $('#content').html('<table><tr></tr></table>')
+                var head = ""
+                for (var i = 0; i < heads.length; i++) {
+                    head = head + "<th>" + heads[i] + "</th>"
+                }
+                $('#content' > table > tr).html(head)
+            }
+
+        });
+    };
+
+    function iframe(database, table) {
+        $('#if').attr("src", "/iframe/" + database + "/" + table)
+    }
+</script>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="div-left">
+                <ul class="menu">
+                    {% for i in list %}
+                        <li>
+                            <a href="#" class="level1">{{ i }}</a>
+                            <ul>
+                                {% for j in dicts[i] %}
+                                    <li id='{{ i }}' name='{{ j }}' onclick="iframe('{{ i }}','{{ j }}');">{{ j }}</li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <iframe src="" id="if"></iframe>
+        </div>
+    </div>
+</div>
+</body>
+</html>
